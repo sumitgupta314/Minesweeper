@@ -17,13 +17,17 @@ public:
     void reveal_cell(int row, int col);
     int get_num_flagged_cells();
     bool is_game_over();
+    bool is_winner();
     void display_board();
+    void display_board_values();
 
 private:
     int flagged_cells;
     std::unordered_set<int> mine_locations;
     Cell* board[WIDTH][HEIGHT];
     bool game_over;
+    bool win;
+    int num_correct_flags;
 
 };
 

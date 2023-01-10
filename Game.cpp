@@ -22,7 +22,7 @@ Game::~Game(){
 // if command is invalid, print invalid command.
 void Game::user_commands(string command){
     if(command == "new game"){
-        delete board;
+        //delete board; TO DO: Properly clear old allocated memory
         board = new Board();
         board->display_board();
         return;
@@ -31,12 +31,16 @@ void Game::user_commands(string command){
         board->display_board();
         return;
     }
+    if(command == "debug: display board values"){
+        board->display_board_values();
+        return;
+    }
     if(command == "help"){
         cout << "commands include:\n";
         cout << "   new game\n";
         cout << "   display board\n";
-        cout << "   reveal cell <row#, col#>\n";
-        cout << "   toggle flag <row#, col#>\n";
+        cout << "   reveal cell <row#> <col#>\n";
+        cout << "   toggle flag <row#> <col#>\n";
     }
     stringstream str_command(command);
     vector<string> args;
@@ -50,7 +54,7 @@ void Game::user_commands(string command){
         int r = stoi(args[2]);
         int c = stoi(args[3]);
         if(r < 0 || r >= HEIGHT || c < 0 || c >= WIDTH){
-            cout << "Please enter coords within bounds" << endl;
+            cout << "Please enter coordinates within bounds" << endl;
             return;
         }else{
             board->reveal_cell(r, c);
@@ -72,6 +76,14 @@ void Game::user_commands(string command){
 
 }
 
+void Game::display_board(){
+    return board->display_board();
+}
+
 bool Game::is_game_running(){
     return !board->is_game_over();
+}
+
+bool Game::game_won(){
+    return board->is_winner();
 }

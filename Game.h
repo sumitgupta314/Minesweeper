@@ -19,9 +19,10 @@ public:
     void user_commands(string command);
 
     //display board by printing it in console
-    // void display_board();
+    void display_board();
     
     bool is_game_running();
+    bool game_won();
 
 private:
     Board* board;

@@ -4,11 +4,18 @@
 using namespace std;
 
 int main(){
-    string input = "";
+    string input;
     Game game;
-    while(game.is_game_running() == true){
+    game.display_board();
+    while(game.is_game_running() && !game.game_won()){
+        //cin >> input;
+        getline(cin, input);
         game.user_commands(input);
-        cin >> input;
+    }
+    if(game.game_won()){
+        cout << "Congratulations! You won!" << endl;
+    }else{
+        cout << "You revealed a mine. You lost." << endl;
     }
 
     return 0;
